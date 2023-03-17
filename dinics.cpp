@@ -51,15 +51,12 @@ struct Dinics {
         if (!pushed) return 0;
         if (u == t) return pushed;
 
-        while (ptr[u] < adj[u].size()) {
+        for (; ptr[u] < adj[u].size(); ++ptr[u]) {
             int id = adj[u][ptr[u]];
             int v = edges[id].v;
             int res = edges[id].c - edges[id].f;
 
-            if (lvl[v] != lvl[u]+1 || !res) {
-                ++ptr[u];
-                continue;
-            }
+            if (lvl[v] != lvl[u]+1 || !res) continue;
 
             int f = dfs(v, min(pushed, res));
             if (f) {
@@ -67,8 +64,6 @@ struct Dinics {
                 edges[id^1].f -= f;
                 return f;
             }
-
-            ++ptr[u];
         }
         return 0;
     }
