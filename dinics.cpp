@@ -68,7 +68,7 @@ struct Dinics {
         return 0;
     }
 
-    int flow() {
+    int max_flow() {
         int f = 0;
         while (lvl[t] != -1) {
             bfs();
@@ -81,5 +81,15 @@ struct Dinics {
 
 
 int main() {
-
+    int V, E, s, t;
+    cin >> V >> E >> s >> t;
+    Dinics dinics(V, E, s, t);
+    
+    int u, v, c;
+    for (int i = 0; i < E; ++i) {
+        cin >> u >> v >> c;
+        dinics.add_edge(u, v, c);
+    }
+    
+    cout << dinics.max_flow() << "\n";
 }
